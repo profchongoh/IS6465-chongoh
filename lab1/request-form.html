@@ -10,10 +10,25 @@
     <main class="container py-5">
         <h1>Request a tutoring session</h1>
             
-        <form class="request-form" action="process-request.php" method="post">
+        <form id="request-form" class="request-form" action="process-request.php" method="post">
         <div class="form-group">
             <label for="course">Course</label>
             <input id="course" name="course" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="topic">Topic</label>
+            <input
+                id="topic"
+                name="topic"
+                class="form-control"
+                type="text"
+                required
+                minlength="1"
+                maxlength="120"
+                title="Enter a topic of 1 to 120 characters."
+                placeholder="Enter a topic of 1 to 120 characters."
+            >
         </div>
 
         <div class="form-group">
@@ -21,8 +36,42 @@
             <input id="date" name="date" class="form-control" type="date" required>
         </div>
 
+        <div class="form-group">
+            <label for="time">Preferred time</label>
+            <select id="time" name="time" class="form-control" required>
+                <option value="">Select a time</option>
+                <option value="Morning">Morning</option>
+                <option value="Afternoon">Afternoon</option>
+                <option value="Evening">Evening</option>
+            </select>
+        </div>
+        
         <button class="btn btn-danger" type="submit">Request session</button>
         </form>
+
+        <script>
+            const requestForm = document.getElementById('request-form');
+            const topicInput = document.getElementById('topic');
+
+            function validateTopic() {
+                const value = topicInput.value.trim();
+                if (value.length < 1 || value.length > 120) {
+                    topicInput.setCustomValidity('Enter a topic of 1 to 120 characters.');
+                    return false;
+                }
+
+                topicInput.setCustomValidity('');
+                return true;
+            }
+
+            topicInput.addEventListener('input', validateTopic);
+            requestForm.addEventListener('submit', function (event) {
+                if (!validateTopic()) {
+                    topicInput.reportValidity();
+                    event.preventDefault();
+                }
+            });
+        </script>
     </main>
 </body>
 
