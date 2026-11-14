@@ -1,0 +1,1 @@
+<?php require_once __DIR__.'/../includes/session.php';require_once __DIR__.'/../includes/csrf.php';if($_SERVER['REQUEST_METHOD']!=='POST'){http_response_code(405);exit('POST required');}requireValidCsrf();destroyAuthenticatedSession();header('Location: login.php?logged_out=1',true,303);exit;
