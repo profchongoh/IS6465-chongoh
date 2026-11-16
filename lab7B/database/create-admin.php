@@ -1,3 +1,5 @@
+
+
 <?php
 if (PHP_SAPI !== 'cli') { exit('Command line only.' . PHP_EOL); }
 if ($argc !== 4) { exit('Usage: php database/create-admin.php "Full Name" email@example.edu "password"' . PHP_EOL); }
